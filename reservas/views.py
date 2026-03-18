@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from .models import Cabana
 
-# Create your views here.
+def home(request):
+    cabanas = Cabana.objects.all()
+    
+    return render(request, 'reservas/index.html', {'cabanas': cabanas})
