@@ -1,0 +1,45 @@
+{% extends 'reservas/base.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="javascript:history.back()" class="btn btn-outline-dark btn-sm">&larr; Volver a los resultados</a>
+</div>
+
+<div class="row">
+    <div class="col-md-7 mb-4">
+        {% if cabana.imagen %}
+            <img src="{{ cabana.imagen.url }}" class="img-fluid rounded shadow w-100" alt="{{ cabana.nombre }}" style="max-height: 500px; object-fit: cover;">
+        {% else %}
+            <div class="bg-secondary text-white d-flex align-items-center justify-content-center rounded shadow w-100" style="height: 400px;">
+                <span>Sin imagen</span>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="col-md-5">
+        <h2 class="fw-bold mb-3">{{ cabana.nombre }}</h2>
+
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <span class="badge bg-light text-dark border p-2">{{ cabana.cantidad_habitaciones }} Habitacion(es)</span>
+            <span class="badge bg-light text-dark border p-2">{{ cabana.cantidad_banos }} Baño(s)</span>
+            {% if cabana.tiene_cocina %}
+                <span class="badge bg-light text-dark border p-2">Cocina</span>
+            {% endif %}
+            {% if cabana.tiene_wifi %}
+                <span class="badge bg-success p-2">Wifi gratis</span>
+            {% endif %}
+        </div>
+
+        <h3 class="text-success fw-bold mb-4">${{ cabana.precio_por_noche }} <span class="text-muted fs-6 fw-normal">x noche</span></h3>
+
+        <h5 class="fw-bold">Descripción</h5>
+        <p class="text-muted" style="white-space: pre-line;">
+            {{ cabana.descripcion }}
+        </p>
+
+        <div class="mt-5 d-grid">
+            <a href="#" class="btn btn-primary btn-lg">RESERVAR</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

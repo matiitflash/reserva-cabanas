@@ -1,0 +1,100 @@
+body {
+    background-image: url("../img/fondo-cabanas.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+}
+
+.titulo{
+    font-size: 130px;
+    color: white;
+}
+
+.hook{
+    background-color: hsla(0, 0%, 96%, 0.76);
+    border-radius: 50px;
+    font-size: 45px;
+    font-weight: 400;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* --- ADAPTACIÓN PARA CELULARES (Responsive Design) --- */
+@media (max-width: 768px) {
+    .titulo {
+        font-size: 60px; /* Reducimos el tamaño a la mitad para móviles */
+    }
+    
+    .hook {
+        width: 90%; /* En celulares, dejamos que ocupe casi todo el ancho */
+        font-size: 25px; /* Achicamos un poco el texto para que quepa bien */
+    }
+}
+
+/* --- ESTILOS DEL BUSCADOR FLOTANTE --- */
+
+.input-flotante {
+    background-color: hsla(0, 0%, 96%, 0.76) !important;
+    border: none !important;
+    
+    padding: 12px !important;
+
+}
+
+.label-flotante {
+    /* Si tu imagen de fondo es oscura, los títulos en negro no se leerán. 
+       Los ponemos en blanco y les damos una sombra sutil para que destaquen. */
+    color: whitesmoke;
+    letter-spacing: 1px;
+}
+
+/* Quitar el borde redondeado extra que se hace entre el ícono y el input */
+.input-group-text.input-flotante {
+    border-right: none !important;
+}
+input[type="date"].input-flotante {
+    border-left: none !important;
+}
+
+/* Ocultar el ícono feo por defecto del navegador (opcional) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Estado normal */
+.btn-azul {
+    background-color: #0e363d !important;
+    color: whitesmoke !important;
+    border: 1px solid #0e363d !important;
+
+    padding: 12px !important; 
+    font-weight: bold !important;
+    letter-spacing: 1px; /* Un poco de espacio entre letras para mayor elegancia */
+}
+
+/* Estado al pasar el mouse por encima */
+.btn-azul:hover {
+    background-color: #1c4a52 !important;
+    color: white !important;
+    border: 1px solid #1c4a52 !important;
+}
+
+/* Estado al hacer clic (presionado) */
+.btn-azul:active {
+    background-color: #082125 !important; /* Un poco más oscuro para dar efecto de profundidad */
+    color: white !important;
+    border: 1px solid #082125 !important;
+}
+
+/* Estado después de hacer clic (cuando queda seleccionado) */
+.btn-azul:focus {
+    /* Le damos un resplandor bonito con tu mismo color pero semi-transparente */
+    box-shadow: 0 0 0 0.25rem rgba(14, 54, 61, 0.4) !important; 
+    color: white !important;
+    outline: none !important;
+}
