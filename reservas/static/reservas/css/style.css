@@ -15,7 +15,7 @@ body {
     background-color: hsla(0, 0%, 96%, 0.76);
     border-radius: 50px;
     font-size: 45px;
-    font-weight: 400;
+    font-weight: 450;
     width: 40%;
     margin-left: auto;
     margin-right: auto;
@@ -46,8 +46,6 @@ body {
 }
 
 .label-flotante {
-    /* Si tu imagen de fondo es oscura, los títulos en negro no se leerán. 
-       Los ponemos en blanco y les damos una sombra sutil para que destaquen. */
     color: whitesmoke;
     letter-spacing: 1px;
 }
@@ -97,4 +95,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     box-shadow: 0 0 0 0.25rem rgba(14, 54, 61, 0.4) !important; 
     color: white !important;
     outline: none !important;
+}
+
+nav{
+    border-bottom: 2px solid whitesmoke;
+    margin-left: 45px;
+    margin-right: 45px;
+}
+
+.texto-blanco{
+    color: whitesmoke;
+    text-shadow: 2px 2px 4px #082125;
 }
