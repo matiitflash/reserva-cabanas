@@ -6,6 +6,25 @@ body {
     background-attachment: fixed; 
 }
 
+.chau-philomene-one-regular {
+    font-family: "Chau Philomene One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.chau-philomene-one-regular-italic {
+    font-family: "Chau Philomene One", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.chewy-regular {
+    font-family: "Chewy", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
 .titulo{
     font-size: 130px;
     color: white;
@@ -38,11 +57,10 @@ body {
 /* --- ESTILOS DEL BUSCADOR FLOTANTE --- */
 
 .input-flotante {
-    background-color: hsla(0, 0%, 96%, 0.76) !important;
+    background-color: hsla(0, 0%, 96%, 0.548) !important;
     border: none !important;
-    
+    font-weight: bold;
     padding: 12px !important;
-
 }
 
 .label-flotante {
@@ -106,4 +124,83 @@ nav{
 .texto-blanco{
     color: whitesmoke;
     text-shadow: 2px 2px 4px #082125;
+}
+
+.card-cabanas{
+    background-color: hsla(0, 0%, 96%, 0.548) !important;
+}
+
+.precio{
+    font-family: "Chewy", system-ui;
+    font-size: 45px;
+    color: #0e363d;
+}
+
+.cabana-titulo{
+    font-family: "Chau Philomene One", sans-serif;
+    font-size: 45px;
+    color: #0e363d;
+}
+
+
+/* CONTENEDOR BENTO BLANCO */
+.bento-gallery-container {
+    background-color: hsla(0, 0%, 96%, 0.548);
+    padding: 1rem; /* Espacio interno blanco */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    
+}
+
+/* === ESTILOS DE LOS ITEMS DE LA GALERÍA === */
+.bento-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: block; /
+}
+
+.bento-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.bento-item:hover img {
+    transform: scale(1.05); /* Zoom suave al hover */
+}
+
+/* DEFINICIÓN DE RATIOS PERSONALIZADOS */
+
+/* Ratio 3:2 para las 2 imágenes superiores derechas */
+.ratio-3x2 {
+    --bs-aspect-ratio: 66.66%; /* 2 dividido 3 */
+}
+
+/* === ESTILO "VER MÁS" EN LA ÚLTIMA IMAGEN === */
+.bento-item-last {
+    position: relative;
+}
+
+.overlay-see-more {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: inherit;
+    transition: background-color 0.3s ease;
+}
+
+.bento-item-last:hover .overlay-see-more {
+    background-color: rgba(0, 0, 0, 0.7); /* Se oscurece un poco más al hover */
 }

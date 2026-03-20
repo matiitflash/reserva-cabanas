@@ -13,3 +13,14 @@ class Cabana(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+
+class ImagenCabana(models.Model):
+    # La ForeignKey conecta esta imagen con una cabaña específica.
+    cabana = models.ForeignKey(Cabana, on_delete=models.CASCADE, related_name='imagenes')
+    
+    # Aquí se guardarán las fotos extra de la galería
+    imagen = models.ImageField(upload_to='galeria_cabanas/')
+    
+    def __str__(self):
+        return f"Imagen de {self.cabana.nombre}"

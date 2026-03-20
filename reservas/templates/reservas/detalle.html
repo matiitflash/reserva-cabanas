@@ -1,10 +1,85 @@
-{% extends 'reservas/base.html' %}
-
-{% block content %}
+{% extends 'reservas/base.html' %} {% block content %}
 <div class="mb-4">
-    <a href="javascript:history.back()" class="btn btn-outline-dark btn-sm">&larr; Volver a los resultados</a>
+  <a href="javascript:history.back()" class="btn btn-dark"
+    >&larr; Volver a los resultados</a
+  >
 </div>
 
+<div class="container my-5">
+  <div class="bento-gallery-container mb-4">
+    <div class="row g-2 align-items-stretch">
+      <div class="col-md-5 d-flex">
+        {% if cabana.imagen %}
+        <a
+          href="{{ cabana.imagen.url }}"
+          data-fslightbox="gallery-cabin"
+          class="bento-item ratio ratio-1x1 h-100 shadow-sm"
+        >
+          <img
+            src="{{ cabana.imagen.url }}"
+            class="rounded object-fit-cover"
+            alt="{{ cabana.nombre }}"
+          />
+        </a>
+        {% endif %}
+      </div>
+
+      <div class="col-md-7 d-flex flex-column justify-content-between">
+        <div class="row g-2 mb-2 flex-grow-1">
+          {% for img_extra in cabana.imagenes.all|slice:":2" %}
+          <div class="col-6 d-flex">
+            <a
+              href="{{ img_extra.imagen.url }}"
+              data-fslightbox="gallery-cabin"
+              class="bento-item ratio ratio-3x2 shadow-sm flex-grow-1"
+            >
+              <img
+                src="{{ img_extra.imagen.url }}"
+                class="rounded object-fit-cover"
+                alt="Foto de {{ cabana.nombre }}"
+              />
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="row g-2 flex-grow-1">
+          {% for img_extra in cabana.imagenes.all|slice:"2:5" %}
+          <div class="col-4 d-flex">
+            <a
+              href="{{ img_extra.imagen.url }}"
+              data-fslightbox="gallery-cabin"
+              class="bento-item {% if forloop.last and cabana.imagenes.all.count > 5 %}bento-item-last{% endif %} ratio ratio-1x1 shadow-sm flex-grow-1"
+            >
+              <img
+                src="{{ img_extra.imagen.url }}"
+                class="rounded object-fit-cover"
+                alt="Foto de {{ cabana.nombre }}"
+              />
+
+              {% if forloop.last and cabana.imagenes.all.count > 5 %}
+              <div class="overlay-see-more rounded">
+                <i class="fa-solid fa-images mb-2 fs-4"></i>
+                <span>Ver +{{ cabana.imagenes.all.count|add:"-5" }} fotos</span>
+              </div>
+              {% endif %}
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% for img_extra in cabana.imagenes.all|slice:"5:" %}
+  <a
+    href="{{ img_extra.imagen.url }}"
+    data-fslightbox="gallery-cabin"
+    class="d-none"
+  ></a>
+  {% endfor %}
+</div>
+<!-- 
 <div class="row">
     <div class="col-md-7 mb-4">
         {% if cabana.imagen %}
@@ -41,5 +116,5 @@
             <a href="#" class="btn btn-primary btn-lg">RESERVAR</a>
         </div>
     </div>
-</div>
+</div> -->
 {% endblock %}

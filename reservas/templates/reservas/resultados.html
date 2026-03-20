@@ -73,7 +73,7 @@
           id="personas"
           class="form-control input-flotante"
           min="1"
-          value="1"
+          value="{{ personas }}"
           required
         />
       </div>
@@ -97,7 +97,7 @@
           id="habitaciones"
           class="form-control input-flotante"
           min="1"
-          value="1"
+          value="{{ habitaciones }}"
           required
         />
       </div>
@@ -116,15 +116,15 @@
 <div class="row">
   {% for cabana in cabanas %}
   <div class="col-12 mb-4">
-    <div class="card shadow-sm border-0 overflow-hidden">
+    <div class="card-cabanas card shadow-sm border-0 overflow-hidden">
       <div class="row g-0">
         <div class="col-md-4">
           {% if cabana.imagen %}
           <img
             src="{{ cabana.imagen.url }}"
-            class="img-fluid rounded-start h-100"
+            class="img-fluid"
             alt="{{ cabana.nombre }}"
-            style="min-height: 250px; object-fit: cover;"
+            style="min-height: 350px; object-fit: cover; padding: 20px; border-radius: 8%;"
           />
           {% else %}
           <div class="bg-secondary text-white d-flex align-items-center justify-content-center h-100" style="min-height: 250px;">
@@ -136,24 +136,23 @@
         <div class="col-md-8">
           <div class="card-body d-flex flex-column h-100">
             <div class="mb-2">
-              <h5 class="card-title fw-bold mb-1">{{ cabana.nombre }}</h5>
-              <p class="text-muted small">
+              <h5 class="card-title cabana-titulo mb-1">{{ cabana.nombre }}</h5>
+              <p class="text-muted">
                 <i class="fa-solid fa-bed me-1"></i> {{ cabana.cantidad_habitaciones }} hab. - 
                 <i class="fa-solid fa-bath me-1"></i> {{ cabana.cantidad_banos }} baño(s) 
                 {% if cabana.tiene_cocina %} - <i class="fa-solid fa-utensils me-1"></i> Cocina{% endif %}
               </p>
             </div>
             
-            <p class="card-text text-secondary">
-              {{ cabana.descripcion|truncatewords:40 }}
+            <p style="font-size: larger; font-weight: 500;" class="card-text">
+              {{ cabana.descripcion|truncatewords:50 }}
             </p>
 
-            <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top">
+            <div class="mt-auto d-flex justify-content-between align-items-center pt-3">
               <div>
-                <span class="text-muted small d-block">Precio por noche</span>
-                <span class="fs-4 fw-bold text-success">${{ cabana.precio_por_noche }}</span>
+                <span class="precio">${{ cabana.precio_por_noche }}</span>
               </div>
-              <a href="{% url 'detalle_cabana' cabana.id %}" class="btn btn-primary px-4 shadow-sm">
+              <a href="{% url 'detalle_cabana' cabana.id %}" class="btn btn-azul px-4 shadow-sm">
                 VER DETALLE
               </a>
             </div>
