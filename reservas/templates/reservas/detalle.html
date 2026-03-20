@@ -1,120 +1,98 @@
-{% extends 'reservas/base.html' %} {% block content %}
-<div class="mb-4">
-  <a href="javascript:history.back()" class="btn btn-dark"
-    >&larr; Volver a los resultados</a
-  >
-</div>
-
-<div class="container my-5">
-  <div class="bento-gallery-container mb-4">
-    <div class="row g-2 align-items-stretch">
-      <div class="col-md-5 d-flex">
-        {% if cabana.imagen %}
-        <a
-          href="{{ cabana.imagen.url }}"
-          data-fslightbox="gallery-cabin"
-          class="bento-item ratio ratio-1x1 h-100 shadow-sm"
-        >
-          <img
-            src="{{ cabana.imagen.url }}"
-            class="rounded object-fit-cover"
-            alt="{{ cabana.nombre }}"
-          />
-        </a>
-        {% endif %}
-      </div>
-
-      <div class="col-md-7 d-flex flex-column justify-content-between">
-        <div class="row g-2 mb-2 flex-grow-1">
-          {% for img_extra in cabana.imagenes.all|slice:":2" %}
-          <div class="col-6 d-flex">
-            <a
-              href="{{ img_extra.imagen.url }}"
-              data-fslightbox="gallery-cabin"
-              class="bento-item ratio ratio-3x2 shadow-sm flex-grow-1"
-            >
-              <img
-                src="{{ img_extra.imagen.url }}"
-                class="rounded object-fit-cover"
-                alt="Foto de {{ cabana.nombre }}"
-              />
-            </a>
-          </div>
-          {% endfor %}
+{% extends 'reservas/base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="bento-gallery-container mb-4">
+      <div class="row g-2 align-items-stretch">
+        <div class="col-md-5 d-flex">
+          {% if cabana.imagen %}
+            <a href="{{ cabana.imagen.url }}" data-fslightbox="gallery-cabin" class="bento-item ratio ratio-1x1 h-100 shadow-sm"><img src="{{ cabana.imagen.url }}" class="rounded object-fit-cover" alt="{{ cabana.nombre }}" /></a>
+          {% endif %}
         </div>
 
-        <div class="row g-2 flex-grow-1">
-          {% for img_extra in cabana.imagenes.all|slice:"2:5" %}
-          <div class="col-4 d-flex">
-            <a
-              href="{{ img_extra.imagen.url }}"
-              data-fslightbox="gallery-cabin"
-              class="bento-item {% if forloop.last and cabana.imagenes.all.count > 5 %}bento-item-last{% endif %} ratio ratio-1x1 shadow-sm flex-grow-1"
-            >
-              <img
-                src="{{ img_extra.imagen.url }}"
-                class="rounded object-fit-cover"
-                alt="Foto de {{ cabana.nombre }}"
-              />
-
-              {% if forloop.last and cabana.imagenes.all.count > 5 %}
-              <div class="overlay-see-more rounded">
-                <i class="fa-solid fa-images mb-2 fs-4"></i>
-                <span>Ver +{{ cabana.imagenes.all.count|add:"-5" }} fotos</span>
+        <div class="col-md-7 d-flex flex-column justify-content-between">
+          <div class="row g-2 mb-2 flex-grow-1">
+            {% for img_extra in cabana.imagenes.all|slice:':2' %}
+              <div class="col-6 d-flex">
+                <a href="{{ img_extra.imagen.url }}" data-fslightbox="gallery-cabin" class="bento-item ratio ratio-3x2 shadow-sm flex-grow-1"><img src="{{ img_extra.imagen.url }}" class="rounded object-fit-cover" alt="Foto de {{ cabana.nombre }}" /></a>
               </div>
-              {% endif %}
-            </a>
+            {% endfor %}
           </div>
-          {% endfor %}
+
+          <div class="row g-2 flex-grow-1">
+            {% for img_extra in cabana.imagenes.all|slice:'2:5' %}
+              <div class="col-4 d-flex">
+                <a href="{{ img_extra.imagen.url }}" data-fslightbox="gallery-cabin" class="bento-item {% if forloop.last and cabana.imagenes.all.count > 5 %}bento-item-last{% endif %} ratio ratio-1x1 shadow-sm flex-grow-1">
+                  <img src="{{ img_extra.imagen.url }}" class="rounded object-fit-cover" alt="Foto de {{ cabana.nombre }}" />
+
+                  {% if forloop.last and cabana.imagenes.all.count > 5 %}
+                    <div class="overlay-see-more rounded">
+                      <i class="fa-solid fa-images mb-2 fs-4"></i>
+                      <span>Ver +{{ cabana.imagenes.all.count|add:'-5' }} fotos</span>
+                    </div>
+                  {% endif %}
+                </a>
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
+
+    {% for img_extra in cabana.imagenes.all|slice:'5:' %}
+      <a href="{{ img_extra.imagen.url }}" data-fslightbox="gallery-cabin" class="d-none"></a>
+    {% endfor %}
   </div>
 
-  {% for img_extra in cabana.imagenes.all|slice:"5:" %}
-  <a
-    href="{{ img_extra.imagen.url }}"
-    data-fslightbox="gallery-cabin"
-    class="d-none"
-  ></a>
-  {% endfor %}
-</div>
-<!-- 
-<div class="row">
-    <div class="col-md-7 mb-4">
-        {% if cabana.imagen %}
-            <img src="{{ cabana.imagen.url }}" class="img-fluid rounded shadow w-100" alt="{{ cabana.nombre }}" style="max-height: 500px; object-fit: cover;">
-        {% else %}
-            <div class="bg-secondary text-white d-flex align-items-center justify-content-center rounded shadow w-100" style="height: 400px;">
-                <span>Sin imagen</span>
-            </div>
-        {% endif %}
+  <div class="container mb-2 d-flex align-items-center gap-2">
+    <h1 class="cabana-titulo2 me-auto mb-0">{{ cabana.nombre }}</h1>
+
+    <a style="font-size: 30px" href="javascript:history.back()" class="btn btn-azul px-4 shadow-sm"><i class="fa-solid fa-backward-step"></i> Volver</a>
+
+    <a style="font-size: 30px" href="#" class="btn btn-azul px-4 shadow-sm">RESERVAR</a>
+  </div>
+
+  <div class="container">
+  <div style="border-radius: 12px; background-color: hsla(0, 0%, 96%, 0.76); padding: 20px;" class="container">
+    <p style="font-size: 25px; color: black;" class="descripcion-detalle mb-5">{{ cabana.descripcion }}</p>
+  </div>
+  </div>
+
+
+  <div class="container mb-5 mt-2">
+    <h4 style="font-size: 40px" class="cabana-titulo2 mb-4 mt-5">Servicios y Amenidades</h4>
+    <div class="d-flex flex-wrap gap-3 mb-5">
+      {% if cabana.tiene_wifi %}
+        <div class="amenity-badge">
+          <i class="fa-solid fa-wifi"></i><span>Wifi gratis</span>
+        </div>
+      {% endif %} {% if cabana.tiene_cocina %}
+        <div class="amenity-badge">
+          <i class="fa-solid fa-utensils"></i><span>Cocina</span>
+        </div>
+      {% endif %} {% if cabana.tiene_tv %}
+        <div class="amenity-badge">
+          <i class="fa-solid fa-tv"></i><span>Televisión</span>
+        </div>
+      {% endif %} {% if cabana.tiene_aire_acondicionado %}
+        <div class="amenity-badge">
+          <i class="fa-solid fa-snowflake"></i><span>Climatización</span>
+        </div>
+      {% endif %} {% if cabana.tiene_estacionamiento %}
+        <div class="amenity-badge">
+          <i class="fa-solid fa-car"></i><span>Estacionamiento</span>
+        </div>
+      {% endif %} {% if cabana.tiene_parrilla %}
+        <div class="amenity-badge">
+          <i class="fa-solid fa-fire-burner"></i><span>Zona de Parrilla</span>
+        </div>
+      {% endif %} {% if cabana.acepta_mascotas %}
+        <div class="amenity-badge">
+          <i class="fa-solid fa-paw"></i><span>Pet friendly</span>
+        </div>
+      {% endif %}
     </div>
 
-    <div class="col-md-5">
-        <h2 class="fw-bold mb-3">{{ cabana.nombre }}</h2>
-
-        <div class="d-flex flex-wrap gap-2 mb-4">
-            <span class="badge bg-light text-dark border p-2">{{ cabana.cantidad_habitaciones }} Habitacion(es)</span>
-            <span class="badge bg-light text-dark border p-2">{{ cabana.cantidad_banos }} Baño(s)</span>
-            {% if cabana.tiene_cocina %}
-                <span class="badge bg-light text-dark border p-2">Cocina</span>
-            {% endif %}
-            {% if cabana.tiene_wifi %}
-                <span class="badge bg-success p-2">Wifi gratis</span>
-            {% endif %}
-        </div>
-
-        <h3 class="text-success fw-bold mb-4">${{ cabana.precio_por_noche }} <span class="text-muted fs-6 fw-normal">x noche</span></h3>
-
-        <h5 class="fw-bold">Descripción</h5>
-        <p class="text-muted" style="white-space: pre-line;">
-            {{ cabana.descripcion }}
-        </p>
-
-        <div class="mt-5 d-grid">
-            <a href="#" class="btn btn-primary btn-lg">RESERVAR</a>
-        </div>
-    </div>
-</div> -->
+    <span style="font-size: 40px" class="cabana-titulo2">Ubicación</span>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11474.832820312091!2d-176.37191702018052!3d-44.02742405910928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x72b3f33995877eff%3A0x3ec090efbd1c5307!2sOwenga%208016%2C%20Nueva%20Zelanda!5e0!3m2!1ses-419!2scl!4v1774037805878!5m2!1ses-419!2scl" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
 {% endblock %}

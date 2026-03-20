@@ -1,171 +1,97 @@
-{% extends 'reservas/base.html' %} 
+{% extends 'reservas/base.html' %}
 {% block content %}
-
-<div class="mb-4 mt-4">
-  <form
-    action="{% url 'buscar' %}"
-    method="GET"
-    class="row g-3 align-items-end justify-content-center"
-  >
-    <div class="col-md-3 col-lg-2">
-      <label class="form-label fw-bold small label-flotante"
-        >FECHA LLEGADA</label
-      >
-      <div class="input-group shadow-sm">
-        <span
-          class="input-group-text input-flotante"
-          style="cursor: pointer"
-          onclick="document.getElementById('fecha_llegada').showPicker()"
-        >
-          <i class="fa-regular fa-calendar-days" style="color: #0e363d"></i>
-        </span>
-        <input
-          type="date"
-          name="llegada"
-          id="fecha_llegada"
-          class="form-control input-flotante"
-          style="cursor: pointer"
-          onclick="this.showPicker()"
-          value="{{ llegada }}"
-          required
-        />
-      </div>
-    </div>
-
-    <div class="col-md-3 col-lg-2">
-      <label class="form-label fw-bold small label-flotante"
-        >FECHA SALIDA</label
-      >
-      <div class="input-group shadow-sm">
-        <span
-          class="input-group-text input-flotante"
-          style="cursor: pointer"
-          onclick="document.getElementById('fecha_salida').showPicker()"
-        >
-          <i class="fa-regular fa-calendar-days" style="color: #0e363d"></i>
-        </span>
-        <input
-          type="date"
-          name="salida"
-          id="fecha_salida"
-          class="form-control input-flotante"
-          style="cursor: pointer"
-          onclick="this.showPicker()"
-          value="{{ salida }}"
-          required
-        />
-      </div>
-    </div>
-
-    <div class="col-md-2 col-lg-2">
-      <label class="form-label fw-bold small label-flotante">PERSONAS</label>
-      <div class="input-group shadow-sm">
-        <span
-          class="input-group-text input-flotante"
-          onclick="document.getElementById('personas').focus()"
-          style="cursor: pointer"
-        >
-          <i class="fa-solid fa-user-group" style="color: #0e363d"></i>
-        </span>
-        <input
-          type="number"
-          name="personas"
-          id="personas"
-          class="form-control input-flotante"
-          min="1"
-          value="{{ personas }}"
-          required
-        />
-      </div>
-    </div>
-
-    <div class="col-md-2 col-lg-2">
-      <label class="form-label fw-bold small label-flotante"
-        >HABITACIONES</label
-      >
-      <div class="input-group shadow-sm">
-        <span
-          class="input-group-text input-flotante"
-          onclick="document.getElementById('habitaciones').focus()"
-          style="cursor: pointer"
-        >
-          <i class="fa-solid fa-bed" style="color: #0e363d"></i>
-        </span>
-        <input
-          type="number"
-          name="habitaciones"
-          id="habitaciones"
-          class="form-control input-flotante"
-          min="1"
-          value="{{ habitaciones }}"
-          required
-        />
-      </div>
-    </div>
-
-    <div class="col-md-2 col-lg-2 d-grid">
-      <button type="submit" class="btn btn-azul shadow-sm">BUSCAR</button>
-    </div>
-  </form>
-</div>
-
-<div class="mb-4">
-  <h2 class="fw-bold texto-blanco">Mostrando resultados según los filtros</h2>
-</div>
-
-<div class="row">
-  {% for cabana in cabanas %}
-  <div class="col-12 mb-4">
-    <div class="card-cabanas card shadow-sm border-0 overflow-hidden">
-      <div class="row g-0">
-        <div class="col-md-4">
-          {% if cabana.imagen %}
-          <img
-            src="{{ cabana.imagen.url }}"
-            class="img-fluid"
-            alt="{{ cabana.nombre }}"
-            style="min-height: 350px; object-fit: cover; padding: 20px; border-radius: 8%;"
-          />
-          {% else %}
-          <div class="bg-secondary text-white d-flex align-items-center justify-content-center h-100" style="min-height: 250px;">
-            <span>Sin imagen</span>
-          </div>
-          {% endif %}
+  <div class="mb-4 mt-4">
+    <form action="{% url 'buscar' %}" method="GET" class="row g-3 align-items-end justify-content-center">
+      <div class="col-md-3 col-lg-2">
+        <label class="form-label fw-bold small label-flotante">FECHA LLEGADA</label>
+        <div class="input-group shadow-sm">
+          <span class="input-group-text input-flotante" style="cursor: pointer" onclick="document.getElementById('fecha_llegada').showPicker()"><i class="fa-regular fa-calendar-days" style="color: #0e363d"></i></span>
+          <input type="date" name="llegada" id="fecha_llegada" class="form-control input-flotante" style="cursor: pointer" onclick="this.showPicker()" value="{{ llegada }}" required />
         </div>
+      </div>
 
-        <div class="col-md-8">
-          <div class="card-body d-flex flex-column h-100">
-            <div class="mb-2">
-              <h5 class="card-title cabana-titulo mb-1">{{ cabana.nombre }}</h5>
-              <p class="text-muted">
-                <i class="fa-solid fa-bed me-1"></i> {{ cabana.cantidad_habitaciones }} hab. - 
-                <i class="fa-solid fa-bath me-1"></i> {{ cabana.cantidad_banos }} baño(s) 
-                {% if cabana.tiene_cocina %} - <i class="fa-solid fa-utensils me-1"></i> Cocina{% endif %}
-              </p>
+      <div class="col-md-3 col-lg-2">
+        <label class="form-label fw-bold small label-flotante">FECHA SALIDA</label>
+        <div class="input-group shadow-sm">
+          <span class="input-group-text input-flotante" style="cursor: pointer" onclick="document.getElementById('fecha_salida').showPicker()"><i class="fa-regular fa-calendar-days" style="color: #0e363d"></i></span>
+          <input type="date" name="salida" id="fecha_salida" class="form-control input-flotante" style="cursor: pointer" onclick="this.showPicker()" value="{{ salida }}" required />
+        </div>
+      </div>
+
+      <div class="col-md-2 col-lg-2">
+        <label class="form-label fw-bold small label-flotante">PERSONAS</label>
+        <div class="input-group shadow-sm">
+          <span class="input-group-text input-flotante" onclick="document.getElementById('personas').focus()" style="cursor: pointer"><i class="fa-solid fa-user-group" style="color: #0e363d"></i></span>
+          <input type="number" name="personas" id="personas" class="form-control input-flotante" min="1" value="{{ personas }}" required />
+        </div>
+      </div>
+
+      <div class="col-md-2 col-lg-2">
+        <label class="form-label fw-bold small label-flotante">HABITACIONES</label>
+        <div class="input-group shadow-sm">
+          <span class="input-group-text input-flotante" onclick="document.getElementById('habitaciones').focus()" style="cursor: pointer"><i class="fa-solid fa-bed" style="color: #0e363d"></i></span>
+          <input type="number" name="habitaciones" id="habitaciones" class="form-control input-flotante" min="1" value="{{ habitaciones }}" required />
+        </div>
+      </div>
+
+      <div class="col-md-2 col-lg-2 d-grid">
+        <button type="submit" class="btn btn-azul shadow-sm">BUSCAR</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="mb-4">
+    <h2 class="fw-bold texto-blanco">Mostrando resultados según los filtros</h2>
+  </div>
+
+  <div class="row">
+    {% for cabana in cabanas %}
+      <div class="col-12 mb-4">
+        <div class="card-cabanas card shadow-sm border-0 overflow-hidden">
+          <div class="row g-0">
+            <div class="col-md-4">
+              {% if cabana.imagen %}
+                <img src="{{ cabana.imagen.url }}" class="img-fluid" alt="{{ cabana.nombre }}" style="min-height: 350px; object-fit: cover; padding: 20px; border-radius: 8%;" />
+              {% else %}
+                <div class="bg-secondary text-white d-flex align-items-center justify-content-center h-100" style="min-height: 250px;">
+                  <span>Sin imagen</span>
+                </div>
+              {% endif %}
             </div>
-            
-            <p style="font-size: larger; font-weight: 500;" class="card-text">
-              {{ cabana.descripcion|truncatewords:50 }}
-            </p>
 
-            <div class="mt-auto d-flex justify-content-between align-items-center pt-3">
-              <div>
-                <span class="precio">${{ cabana.precio_por_noche }}</span>
+            <div class="col-md-8">
+              <div class="card-body d-flex flex-column h-100">
+                <div class="mb-2">
+                  <h5 class="card-title cabana-titulo mb-1">{{ cabana.nombre }}</h5>
+                  <p class="text-muted">
+                    <i class="fa-solid fa-bed me-1"></i> {{ cabana.cantidad_habitaciones }} hab. -
+                    <i class="fa-solid fa-bath me-1"></i> {{ cabana.cantidad_banos }} baño(s){% if cabana.tiene_cocina %}
+                      - <i class="fa-solid fa-utensils me-1"></i> Cocina
+                    {% endif %}
+                  </p>
+                </div>
+
+                <p style="font-size: larger; font-weight: 500;" class="card-text">{{ cabana.descripcion|truncatewords:50 }}</p>
+
+                <div class="mt-auto d-flex justify-content-between align-items-center pt-3">
+                  <div class="d-flex align-items-center">
+                    <span class="fw-bold precio me-1">${{ cabana.precio_por_noche }}</span>
+                    <span class="precio" style="font-size: 0.9rem; line-height: 1;">x noche</span>
+                  </div>
+
+                  <a href="{% url 'detalle_cabana' cabana.id %}" class="btn btn-azul px-4 shadow-sm">VER DETALLE</a>
+                </div>
+                
               </div>
-              <a href="{% url 'detalle_cabana' cabana.id %}" class="btn btn-azul px-4 shadow-sm">
-                VER DETALLE
-              </a>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    {% empty %}
+      <div class="col-12 text-center py-5">
+        <h3 class="text-muted">No encontramos cabañas con esos requisitos.</h3>
+        <p>Intenta cambiar las fechas o reducir el número de personas/habitaciones.</p>
+      </div>
+    {% endfor %}
   </div>
-  {% empty %}
-  <div class="col-12 text-center py-5">
-    <h3 class="text-muted">No encontramos cabañas con esos requisitos.</h3>
-    <p>Intenta cambiar las fechas o reducir el número de personas/habitaciones.</p>
-  </div>
-  {% endfor %}
-</div>
 {% endblock %}
