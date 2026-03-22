@@ -3,7 +3,7 @@ from django.db import models
 class Cabana(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
-    precio_por_noche = models.DecimalField(max_digits=10, decimal_places=2)
+    precio_por_noche = models.IntegerField()
     capacidad_personas = models.IntegerField()
     cantidad_habitaciones = models.IntegerField()
     cantidad_banos = models.IntegerField()
@@ -43,3 +43,33 @@ class ImagenCabana(models.Model):
 
     def __str__(self):
         return f"Imagen de {self.cabana.nombre}"
+
+
+class Reserva(models.Model):
+    # Relación: Una cabaña puede tener muchas reservas
+    cabana = models.ForeignKey(Cabana, on_delete=models.CASCADE, related_name='reservas')
+    
+    # Datos del cliente
+    nombre_huesped = models.CharField(max_length=100, verbose_name="Nombre del Huésped")
+    email_huesped = models.EmailField(verbose_name="Correo Electrónico")
+    telefono_huesped = models.CharField(max_length=20, verbose_name="Teléfono")
+    
+    # Datos de la estadía
+    fecha_llegada = models.DateField()
+    fecha_salida = models.DateField()
+    cantidad_personas = models.IntegerField()
+    precio_total = models.IntegerField()
+    
+    # Metadatos
+    fecha_reserva = models.DateTimeField(auto_now_add=True)
+    
+    # Opciones de estado de la reserva
+    ESTADOS_RESERVA = (
+        ('pendiente', 'Pendiente (Por pagar/confirmar)'),
+        ('confirmada', 'Confirmada y Pagada'),
+        ('cancelada', 'Cancelada'),
+    )
+    estado = models.CharField(max_length=20, choices=ESTADOS_RESERVA, default='pendiente')
+
+    def __str__(self):
+        return f"Reserva #{self.id} - {self.cabana.nombre} ({self.fecha_llegada} al {self.fecha_salida})"
