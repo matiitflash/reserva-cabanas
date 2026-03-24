@@ -1,0 +1,72 @@
+{% extends 'reservas/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="row g-5">
+        
+        <div class="col-md-7 col-lg-8">
+            <h4 class="cabana-titulo2 mb-3">Tus Datos Personales</h4>
+            
+            <form class="formulario-checkout" method="POST" action="">
+                {% csrf_token %} <div class="row g-3">
+                    <div class="col-sm-12">
+                        <label for="nombre_huesped" class="form-label">Nombre Completo</label>
+                        <input type="text" class="form-control" id="nombre_huesped" name="nombre_huesped" required>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="email_huesped" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="email_huesped" name="email_huesped" placeholder="tu@correo.com" required>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="telefono_huesped" class="form-label">Teléfono / WhatsApp</label>
+                        <input type="text" class="form-control" id="telefono_huesped" name="telefono_huesped" required>
+                    </div>
+                </div>
+
+                <button class="w-100 btn btn-azul btn-lg mt-4" type="submit" {% if noches <= 0 %}disabled{% endif %}>
+                    Confirmar Reserva
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="cabana-titulo2">Resumen</span>
+            </h4>
+            <ul class="list-group mb-3 shadow-sm rounded-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm p-3">
+                    <div>
+                        <h6 class="my-0">{{ cabana.nombre }}</h6>
+                        <small class="text-muted">Capacidad: {{ personas }} persona(s)</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm p-3">
+                    <div>
+                        <h6 class="my-0">Fechas</h6>
+                        <small class="text-muted">Del {{ llegada }} al {{ salida }}</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm p-3">
+                    <div>
+                        <h6 class="my-0">Estadía</h6>
+                        <small class="text-muted">{{ noches }} noche(s) x ${{ cabana.precio_por_noche }}</small>
+                    </div>
+                </li>
+                
+                <li class="list-group-item d-flex justify-content-between bg-light p-3">
+                    <span class="fw-bold">Total (CLP/USD)</span>
+                    <strong class="fs-5">${{ precio_total }}</strong>
+                </li>
+            </ul>
+            
+            {% if noches <= 0 %}
+            <div class="alert alert-danger" role="alert">
+                Revisa las fechas seleccionadas. La fecha de salida debe ser posterior a la de llegada.
+            </div>
+            {% endif %}
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

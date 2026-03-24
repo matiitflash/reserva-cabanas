@@ -79,7 +79,7 @@
                     <span class="precio" style="font-size: 0.9rem; line-height: 1;">x noche</span>
                   </div>
 
-                  <a href="{% url 'detalle_cabana' cabana.id %}" class="btn btn-azul px-4 shadow-sm">VER DETALLE</a>
+                  <a href="{% url 'detalle_cabana' cabana.id %}?llegada={{ llegada }}&salida={{ salida }}&personas={{ personas }}" class="btn btn-azul px-4 shadow-sm">VER DETALLE</a>
                 </div>
                 
               </div>

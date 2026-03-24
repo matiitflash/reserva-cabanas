@@ -48,15 +48,14 @@
 
     <a style="font-size: 30px" href="javascript:history.back()" class="btn btn-azul px-4 shadow-sm"><i class="fa-solid fa-backward-step"></i> Volver</a>
 
-    <a style="font-size: 30px" href="#" class="btn btn-azul px-4 shadow-sm">RESERVAR</a>
+    <a style="font-size: 30px" href="{% url 'checkout' cabana.id %}?llegada={{ request.GET.llegada }}&salida={{ request.GET.salida }}&personas={{ request.GET.personas }}" class="btn btn-azul">Reservar</a>
   </div>
 
   <div class="container">
-  <div style="border-radius: 12px; background-color: hsla(0, 0%, 96%, 0.76); padding: 20px;" class="container">
-    <p style="font-size: 25px; color: black;" class="descripcion-detalle mb-5">{{ cabana.descripcion }}</p>
+    <div style="border-radius: 12px; background-color: hsla(0, 0%, 96%, 0.76); padding: 20px;" class="container">
+      <p style="font-size: 25px; color: black;" class="descripcion-detalle mb-5">{{ cabana.descripcion }}</p>
+    </div>
   </div>
-  </div>
-
 
   <div class="container mb-5 mt-2">
     <h4 style="font-size: 40px" class="cabana-titulo2 mb-4 mt-5">Servicios y Amenidades</h4>
