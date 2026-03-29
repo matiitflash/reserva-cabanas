@@ -1,6 +1,6 @@
 # Sistema de Reservas de Cabañas (Django MVP)
 
-Un sistema web completo de gestión de reservas para un complejo de cabañas o hotel boutique. Este proyecto es un MVP desarrollado para demostrar habilidades de desarrollo Full-Stack con Python, enfocándose en la lógica de negocio sólida y una experiencia de usuario fluida.
+Un sistema web de ejemplo para gestionar reservas en un complejo de cabañas u hotel. Este proyecto es un MVP desarrollado para demostrar habilidades de desarrollo Full-Stack con Python, enfocándose en la lógica de negocio sólida y una experiencia de usuario fluida.
 
 ## Características Principales
 
@@ -14,6 +14,6 @@ Un sistema web completo de gestión de reservas para un complejo de cabañas o h
 ## Tecnologías Utilizadas
 
 * **Backend:** Python 3, Django (ORM, Vistas basadas en funciones, Sistema de Plantillas).
-* **Base de Datos:** SQLite (escalable fácilmente a PostgreSQL).
+* **Base de Datos:** SQLite (escalable a PostgreSQL).
 * **Frontend:** HTML5, CSS3, Bootstrap 5, FontAwesome.
 * **Librerías Extra:** `fslightbox` (Galería modal).
